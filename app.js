@@ -1,6 +1,8 @@
 // Haftalık — aylık/haftalık plan ve yapışkan not panosu. Veriler localStorage'da durur.
 
-const KEY = "haftalik.v1";
+function storeKey() {
+  return HaftalikAuth.storageKey("haftalik.v1");
+}
 const COLORS = ["amber", "rose", "mint", "lilac", "peach", "sky"];
 const KINDS = ["sticky", "task", "appointment", "routine"];
 const KIND_LABEL = { sticky: "Not", task: "Görev", appointment: "Randevu", routine: "Rutin" };
@@ -355,7 +357,7 @@ function stickerSheetHTML() {
 
 function readStore() {
   try {
-    const raw = localStorage.getItem(KEY);
+    const raw = localStorage.getItem(storeKey());
     return raw ? JSON.parse(raw) : null;
   } catch {
     return null;
@@ -364,7 +366,7 @@ function readStore() {
 
 function save() {
   try {
-    localStorage.setItem(KEY, JSON.stringify({
+    localStorage.setItem(storeKey(), JSON.stringify({
       version: 1,
       view: state.view,
       cursor: state.cursor,
@@ -1288,4 +1290,4 @@ function init() {
   paint();
 }
 
-init();
+HaftalikAuth.onReady(init);

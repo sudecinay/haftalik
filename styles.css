@@ -272,6 +272,7 @@ body[data-theme="beyaz"] .themes {
   padding: 7px 12px;
   color: inherit;
 }
+a.ghost { text-decoration: none; display: inline-flex; align-items: center; }
 .primary {
   background: var(--accent);
   color: var(--on-accent);
@@ -1269,4 +1270,118 @@ dialog::backdrop { background: rgba(42, 36, 28, .38); }
   .sheet, .board { box-shadow: none; height: auto; overflow: visible; }
   .board { break-before: page; width: auto; }
   .composer, .menu, .cell-add, .quick, .row-actions, .sticky-tools, .primary, .modes { display: none !important; }
+}
+
+body.is-locked .desk { display: none; }
+.who {
+  font-size: 13px;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--chrome) 82%, transparent);
+}
+.gate { display: none; }
+body.is-locked .gate {
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 16px;
+}
+.gate-card {
+  width: min(420px, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: var(--sheet);
+  color: var(--ink);
+  border-radius: 18px;
+  padding: 28px 24px 22px;
+  box-shadow: 0 28px 60px -30px var(--shadow);
+}
+.gate-title {
+  font-family: var(--serif);
+  font-size: 2.4rem;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.gate-card label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.gate-card input {
+  width: 100%;
+  background: var(--input);
+  color: var(--ink);
+  border: 1px solid var(--input-line);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+.gate-card .primary { align-self: flex-start; margin-top: 4px; }
+.gate-error { color: var(--accent); font-size: 13px; margin: 0; }
+body.page-mesai .desk { height: auto; min-height: 100%; }
+.brand-link { color: inherit; text-decoration: none; }
+.mesai-wrap { width: min(1180px, 100%); margin: 0 auto; }
+.mesai-sheet { height: auto; overflow: visible; }
+.mesai-form {
+  display: grid;
+  grid-template-columns: minmax(120px, 1.1fr) 146px 112px 112px 88px minmax(150px, 1.4fr) auto;
+  gap: 10px;
+  align-items: end;
+  padding: 16px 18px 8px;
+}
+.mesai-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.mesai-form input,
+.mesai-form textarea {
+  width: 100%;
+  background: var(--input);
+  color: var(--ink);
+  border: 1px solid var(--input-line);
+  border-radius: 10px;
+  padding: 8px 10px;
+  font: inherit;
+}
+.mesai-form textarea { min-height: 42px; resize: vertical; }
+.mesai-form input[readonly] { color: var(--ink); background: color-mix(in srgb, var(--input) 70%, var(--line)); }
+.mesai-sum {
+  margin: 0;
+  padding: 4px 18px 12px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.mesai-table-wrap { padding: 0 12px 18px; overflow-x: auto; }
+.mesai-table { width: 100%; border-collapse: collapse; }
+.mesai-table th {
+  text-align: left;
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--line);
+}
+.mesai-table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+.mesai-table tr:hover td { background: var(--hover-bg); }
+.mesai-hours { font-variant-numeric: tabular-nums; font-weight: 600; white-space: nowrap; }
+.mesai-note { white-space: pre-wrap; overflow-wrap: anywhere; }
+.mesai-actions { display: flex; gap: 4px; justify-content: flex-end; white-space: nowrap; }
+.mesai-empty { padding: 28px 18px 32px; color: var(--muted); }
+.page-mesai .topbar .primary[disabled] { opacity: .45; }
+
+@media (max-width: 860px) {
+  .mesai-form { grid-template-columns: 1fr 1fr; }
+  .mesai-form label:nth-child(6),
+  .mesai-form .primary { grid-column: 1 / -1; }
 }

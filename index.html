@@ -12,7 +12,21 @@
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Literata:ital,opsz,wght@0,7..72,500;0,7..72,700;1,7..72,560&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body data-theme="bordo">
+<body class="is-locked" data-theme="bordo">
+  <div class="gate" id="gate">
+    <form class="gate-card" id="gate-form" autocomplete="on">
+      <p class="mast-kicker">Haftalık</p>
+      <h1 class="gate-title">Giriş</h1>
+      <label>E-posta
+        <input name="email" type="email" autocomplete="username" required />
+      </label>
+      <label>Şifre
+        <input name="password" type="password" autocomplete="current-password" required />
+      </label>
+      <p class="gate-error" id="gate-error" hidden></p>
+      <button type="submit" class="primary">Giriş yap</button>
+    </form>
+  </div>
   <a class="skip" href="#sheet">Plana geç</a>
   <div class="desk">
     <header class="topbar">
@@ -38,6 +52,8 @@
       <p id="today-count" class="today-count" aria-live="polite"></p>
 
       <div class="spacer"></div>
+      <p id="who" class="who" hidden></p>
+      <button type="button" class="ghost" id="logout-btn" hidden>Çıkış</button>
 
       <div class="themes" role="group" aria-label="Renk ayarı">
         <button type="button" class="theme-dot" data-action="set-theme" data-theme="bordo" aria-label="Bordo"></button>
@@ -51,6 +67,7 @@
         <button type="button" role="tab" data-action="set-view" data-view="week">Hafta</button>
         <button type="button" role="tab" data-action="set-view" data-view="day">Gün</button>
       </div>
+      <a class="ghost" href="mesai.html">Mesai</a>
       <button type="button" class="primary" data-action="new-plan">Yeni plan</button>
       <details class="menu">
         <summary>Veri</summary>
@@ -175,6 +192,7 @@
     <button type="button" id="toast-undo" hidden>Geri al</button>
   </div>
   <input id="import-file" type="file" accept="application/json,.json" hidden />
+  <script src="auth.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
