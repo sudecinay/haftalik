@@ -1385,3 +1385,208 @@ body.page-mesai .desk { height: auto; min-height: 100%; }
   .mesai-form label:nth-child(6),
   .mesai-form .primary { grid-column: 1 / -1; }
 }
+
+.page-pano .pano-frame {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  padding: 18px;
+  border-radius: 22px;
+  background:
+    repeating-linear-gradient(92deg, rgba(255, 214, 160, .1) 0 2px, transparent 2px 9px),
+    linear-gradient(160deg, #a87445 0%, #6e4324 46%, #4a2c16 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 220, 170, .28),
+    inset 0 -2px 0 rgba(40, 18, 8, .35),
+    0 24px 48px -28px rgba(20, 8, 4, .55);
+}
+.page-pano .pano-stage {
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  background-color: #c6a36c;
+  box-shadow:
+    inset 0 0 0 1px rgba(90, 50, 20, .28),
+    inset 0 18px 40px rgba(70, 40, 16, .18);
+}
+.page-pano .pano-cork-fill {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+.page-pano .pano-deco {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+  opacity: .92;
+}
+.page-pano .pano-deco-tl { top: 10px; left: 12px; width: 92px; height: 110px; }
+.page-pano .pano-deco-br { right: 10px; bottom: 8px; width: 130px; height: 96px; }
+.page-pano .pano-empty {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  margin: 0;
+  color: rgba(72, 46, 24, .62);
+  font-family: var(--hand);
+  font-size: 1.7rem;
+  text-align: center;
+  pointer-events: none;
+}
+.page-pano .board .composer { margin-top: auto; }
+.page-pano .pano-paper-row {
+  display: flex;
+  gap: 8px;
+  padding: 0 2px;
+}
+.page-pano .pano-paper-row label { position: relative; }
+.page-pano .pano-paper-row input { position: absolute; opacity: 0; inset: 0; }
+.page-pano .pano-paper-row span {
+  display: inline-flex;
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--board-ink) 18%, transparent);
+  font-size: 12px;
+}
+.page-pano .pano-paper-row label:has(input:checked) span {
+  background: var(--board-ink);
+  color: var(--board);
+}
+.page-pano .pano-photo-btn {
+  color: inherit;
+  border-color: color-mix(in srgb, var(--board-ink) 28%, transparent);
+}
+.page-pano .pano-note {
+  position: absolute;
+  margin: 0;
+  min-width: 132px;
+  max-width: 210px;
+  padding: 22px 14px 12px;
+  border-radius: 2px;
+  background: var(--fill, #ffe15a);
+  box-shadow: 1px 8px 14px -8px rgba(40, 20, 8, .55);
+  transform: rotate(var(--tilt));
+  touch-action: none;
+  cursor: grab;
+  z-index: 1;
+}
+.page-pano .pano-note::before { display: none; }
+.page-pano .pano-note.paper-lined {
+  background:
+    repeating-linear-gradient(
+      #fffdf6,
+      #fffdf6 23px,
+      #ead9c4 24px
+    );
+  box-shadow:
+    inset 28px 0 0 #f4eee4,
+    1px 8px 14px -8px rgba(40, 20, 8, .5);
+  padding-left: 34px;
+}
+.page-pano .pano-polaroid {
+  width: 168px;
+  min-width: 168px;
+  max-width: 168px;
+  padding: 10px 10px 8px;
+  background: #f6f1e8;
+  box-shadow: 2px 10px 16px -10px rgba(30, 16, 8, .6);
+}
+.page-pano .pano-polaroid img {
+  display: block;
+  width: 100%;
+  height: 132px;
+  object-fit: cover;
+  background: #d9cbb8;
+}
+.page-pano .pano-polaroid textarea {
+  min-height: 28px;
+  margin-top: 6px;
+  font-size: 1.15rem;
+  text-align: center;
+}
+.page-pano .pano-grip {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 26px;
+  cursor: grab;
+  z-index: 2;
+}
+.page-pano .pin {
+  position: absolute;
+  top: -7px;
+  left: 50%;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  box-shadow:
+    0 2px 3px rgba(0, 0, 0, .35),
+    inset 0 1px 0 rgba(255, 255, 255, .55);
+  z-index: 3;
+  pointer-events: none;
+}
+.page-pano .pin::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 13px;
+  width: 2px;
+  height: 7px;
+  background: linear-gradient(#cfd3d6, #8b9096);
+  transform: translateX(-50%);
+}
+.page-pano .pin-red { background: radial-gradient(circle at 32% 28%, #ff8d8d, #c62828 62%, #7a1010); }
+.page-pano .pin-purple { background: radial-gradient(circle at 32% 28%, #d7b4ff, #7b3fb0 62%, #4a1d72); }
+.page-pano .pin-green { background: radial-gradient(circle at 32% 28%, #b6e59a, #3d8f3a 62%, #1f5a22); }
+.page-pano .pin-blue { background: radial-gradient(circle at 32% 28%, #9ecbff, #2a6fbe 62%, #163e72); }
+.page-pano .pin-gold { background: radial-gradient(circle at 32% 28%, #ffe7a3, #c49a32 62%, #7a5a12); }
+.page-pano .pano-note textarea {
+  width: 100%;
+  min-height: 72px;
+  border: 0;
+  resize: none;
+  padding: 0;
+  background: transparent;
+  color: #2a2118;
+  font-family: var(--hand);
+  font-size: 1.42rem;
+  line-height: 1.18;
+  cursor: text;
+}
+.page-pano .pano-note textarea::placeholder { color: rgba(42, 36, 28, .4); }
+.page-pano .pano-tools {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4px;
+}
+.page-pano .pano-tools .text-btn,
+.page-pano .pano-tools .swatch,
+.page-pano .pano-x { opacity: 0; }
+.page-pano .pano-note:hover .text-btn,
+.page-pano .pano-note:focus-within .text-btn,
+.page-pano .pano-note:hover .swatch,
+.page-pano .pano-note:focus-within .swatch,
+.page-pano .pano-note:hover .pano-x,
+.page-pano .pano-note:focus-within .pano-x { opacity: 1; }
+.page-pano .pano-tools .swatch { width: 14px; height: 14px; }
+.page-pano .pano-x {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 22px;
+  height: 22px;
+  border: 0;
+  background: transparent;
+  color: #6b6258;
+}
+.page-pano .pano-note.is-lift {
+  cursor: grabbing;
+  transform: rotate(0deg) scale(1.04);
+  box-shadow: 2px 16px 22px -10px rgba(40, 18, 8, .55);
+}

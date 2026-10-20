@@ -61,6 +61,7 @@ const HaftalikAuth = (() => {
     sessionStorage.setItem(SESSION, account.email);
     adoptLegacy("haftalik.v1", account.email);
     adoptLegacy("haftalik.mesai.v1", account.email);
+    adoptLegacy("haftalik.pano.v1", account.email);
     showApp(account);
     document.dispatchEvent(new Event("haftalik-auth"));
   }
