@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Literata:ital,opsz,wght@0,7..72,500;0,7..72,700;1,7..72,560&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=pano3" />
 </head>
 <body class="page-mesai is-locked" data-theme="bordo">
   <div class="gate" id="gate">
@@ -46,8 +46,11 @@
         <button type="button" class="theme-dot" data-theme="beyaz" aria-label="Beyaz"></button>
         <button type="button" class="theme-dot" data-theme="koyu" aria-label="Koyu"></button>
       </div>
-      <a class="ghost" href="index.html">Takvim</a>
-      <a class="ghost" href="pano.html">Pano</a>
+      <nav class="page-nav" aria-label="Sayfalar">
+        <a class="ghost" href="index.html">Takvim</a>
+        <a class="ghost is-here" href="mesai.html">Mesai</a>
+        <a class="ghost" href="pano.html">Pano</a>
+      </nav>
       <button type="button" class="primary" id="export-xlsx">Excel’e aktar</button>
     </header>
 

@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Literata:ital,opsz,wght@0,7..72,500;0,7..72,700;1,7..72,560&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=pano4" />
 </head>
 <body class="page-pano is-locked" data-theme="bordo">
   <div class="gate" id="gate">
@@ -46,8 +46,11 @@
         <button type="button" class="theme-dot" data-theme="beyaz" aria-label="Beyaz"></button>
         <button type="button" class="theme-dot" data-theme="koyu" aria-label="Koyu"></button>
       </div>
-      <a class="ghost" href="index.html">Takvim</a>
-      <a class="ghost" href="mesai.html">Mesai</a>
+      <nav class="page-nav" aria-label="Sayfalar">
+        <a class="ghost" href="index.html">Takvim</a>
+        <a class="ghost" href="mesai.html">Mesai</a>
+        <a class="ghost is-here" href="pano.html">Pano</a>
+      </nav>
     </header>
 
     <main class="workspace">
@@ -55,51 +58,70 @@
         <section class="pano-stage" id="cork" aria-label="İğneli pano">
           <svg class="pano-cork-fill" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="none">
             <defs>
-              <pattern id="cork-pat" patternUnits="userSpaceOnUse" width="72" height="72">
-                <rect width="72" height="72" fill="#c7a46d"/>
-                <ellipse cx="10" cy="14" rx="7" ry="4" fill="#b48b55" opacity=".55"/>
-                <ellipse cx="34" cy="8" rx="9" ry="5" fill="#d4b07a" opacity=".45"/>
-                <ellipse cx="58" cy="18" rx="8" ry="4" fill="#9a6d3d" opacity=".35"/>
-                <ellipse cx="20" cy="36" rx="11" ry="5" fill="#a87a48" opacity=".4"/>
-                <ellipse cx="48" cy="40" rx="8" ry="6" fill="#d8b67e" opacity=".38"/>
-                <ellipse cx="8" cy="56" rx="6" ry="4" fill="#8d6236" opacity=".32"/>
-                <ellipse cx="38" cy="60" rx="10" ry="4" fill="#b8905c" opacity=".42"/>
-                <ellipse cx="64" cy="52" rx="7" ry="5" fill="#c9a56c" opacity=".5"/>
-                <circle cx="16" cy="22" r="1.3" fill="#6e4524" opacity=".28"/>
-                <circle cx="44" cy="16" r="1.1" fill="#6e4524" opacity=".22"/>
-                <circle cx="28" cy="48" r="1.4" fill="#6e4524" opacity=".25"/>
-                <circle cx="60" cy="34" r="1" fill="#6e4524" opacity=".2"/>
-                <circle cx="52" cy="64" r="1.2" fill="#6e4524" opacity=".24"/>
+              <pattern id="cork-pat" patternUnits="userSpaceOnUse" width="96" height="96">
+                <rect width="96" height="96" fill="#c9a56e"/>
+                <ellipse cx="14" cy="18" rx="7" ry="4" fill="#b48952" opacity=".16" transform="rotate(-16 14 18)"/>
+                <ellipse cx="48" cy="12" rx="9" ry="5" fill="#dfc79a" opacity=".14" transform="rotate(8 48 12)"/>
+                <ellipse cx="78" cy="34" rx="8" ry="4.5" fill="#a67a45" opacity=".12" transform="rotate(-10 78 34)"/>
+                <ellipse cx="28" cy="52" rx="10" ry="5" fill="#d8bc8c" opacity=".12" transform="rotate(18 28 52)"/>
+                <ellipse cx="66" cy="70" rx="8" ry="4" fill="#9d7042" opacity=".1" transform="rotate(-12 66 70)"/>
+                <ellipse cx="18" cy="82" rx="6" ry="3.5" fill="#c9a36e" opacity=".14"/>
+                <g fill="#6b4426">
+                  <circle cx="12" cy="10" r=".45" opacity=".18"/>
+                  <circle cx="27" cy="22" r=".35" opacity=".14"/>
+                  <circle cx="44" cy="8" r=".5" opacity=".16"/>
+                  <circle cx="63" cy="24" r=".3" opacity=".18"/>
+                  <circle cx="82" cy="14" r=".4" opacity=".13"/>
+                  <circle cx="8" cy="40" r=".35" opacity=".16"/>
+                  <circle cx="22" cy="46" r=".55" opacity=".12"/>
+                  <circle cx="40" cy="38" r=".3" opacity=".18"/>
+                  <circle cx="58" cy="48" r=".45" opacity=".14"/>
+                  <circle cx="74" cy="42" r=".3" opacity=".16"/>
+                  <circle cx="90" cy="28" r=".4" opacity=".12"/>
+                  <circle cx="16" cy="64" r=".35" opacity=".15"/>
+                  <circle cx="34" cy="72" r=".5" opacity=".13"/>
+                  <circle cx="52" cy="64" r=".3" opacity=".17"/>
+                  <circle cx="70" cy="78" r=".45" opacity=".12"/>
+                  <circle cx="88" cy="68" r=".3" opacity=".16"/>
+                  <circle cx="24" cy="88" r=".4" opacity=".14"/>
+                  <circle cx="46" cy="90" r=".3" opacity=".16"/>
+                  <circle cx="68" cy="88" r=".45" opacity=".12"/>
+                  <circle cx="86" cy="84" r=".3" opacity=".15"/>
+                </g>
               </pattern>
             </defs>
             <rect width="100%" height="100%" fill="url(#cork-pat)"/>
           </svg>
-          <svg class="pano-deco pano-deco-tl" viewBox="0 0 90 110" aria-hidden="true">
-            <g fill="none" stroke="#3d5a32" stroke-width="2" stroke-linecap="round">
-              <path d="M18 98 C22 70 8 48 28 22"/>
-              <path d="M32 100 C36 72 48 50 40 24"/>
-              <path d="M46 102 C42 74 62 52 70 30"/>
+          <svg class="pano-deco pano-deco-tl" viewBox="0 0 110 150" aria-hidden="true">
+            <g fill="none" stroke="#5e6b4c" stroke-width="1.15" stroke-linecap="round">
+              <path d="M34 146 C32 108 18 78 36 42"/>
+              <path d="M48 148 C52 112 44 82 58 48"/>
+              <path d="M62 146 C70 116 78 88 72 54"/>
             </g>
-            <g fill="#4e7340">
-              <ellipse cx="24" cy="28" rx="11" ry="6" transform="rotate(-28 24 28)"/>
-              <ellipse cx="38" cy="22" rx="13" ry="6" transform="rotate(18 38 22)"/>
-              <ellipse cx="52" cy="36" rx="12" ry="5" transform="rotate(-12 52 36)"/>
-              <ellipse cx="66" cy="28" rx="10" ry="5" transform="rotate(32 66 28)"/>
-              <ellipse cx="18" cy="46" rx="9" ry="4" transform="rotate(-40 18 46)"/>
+            <g fill="#6d7d56">
+              <ellipse cx="30" cy="48" rx="11" ry="4.2" transform="rotate(-42 30 48)" opacity=".9"/>
+              <ellipse cx="22" cy="64" rx="10" ry="3.6" transform="rotate(-58 22 64)" opacity=".82"/>
+              <ellipse cx="42" cy="58" rx="12" ry="4" transform="rotate(24 42 58)" opacity=".88"/>
+              <ellipse cx="50" cy="44" rx="11" ry="3.8" transform="rotate(-8 50 44)" opacity=".8"/>
+              <ellipse cx="66" cy="52" rx="10" ry="3.5" transform="rotate(36 66 52)" opacity=".86"/>
+              <ellipse cx="74" cy="68" rx="9" ry="3.2" transform="rotate(18 74 68)" opacity=".75"/>
+              <ellipse cx="38" cy="78" rx="9" ry="3.2" transform="rotate(-30 38 78)" opacity=".7"/>
             </g>
           </svg>
-          <svg class="pano-deco pano-deco-br" viewBox="0 0 120 90" aria-hidden="true">
-            <g fill="#efe6d4" stroke="#d7c8ae" stroke-width=".6">
-              <circle cx="78" cy="62" r="3.2"/>
-              <circle cx="88" cy="54" r="2.6"/>
-              <circle cx="96" cy="64" r="2.2"/>
-              <circle cx="70" cy="50" r="2.4"/>
-              <circle cx="84" cy="72" r="2"/>
-              <circle cx="62" cy="66" r="2.8"/>
-              <circle cx="104" cy="56" r="2.3"/>
-              <circle cx="92" cy="44" r="1.8"/>
+          <svg class="pano-deco pano-deco-br" viewBox="0 0 140 100" aria-hidden="true">
+            <path d="M18 92 C48 78 72 70 118 48" fill="none" stroke="#8d7b62" stroke-width="1.1" stroke-linecap="round"/>
+            <path d="M30 94 C52 84 70 86 96 70" fill="none" stroke="#a8947c" stroke-width=".8" stroke-linecap="round"/>
+            <g fill="#f4ecdf" stroke="#e2d3bc" stroke-width=".5">
+              <circle cx="86" cy="58" r="2.3"/>
+              <circle cx="96" cy="50" r="1.7"/>
+              <circle cx="104" cy="60" r="2"/>
+              <circle cx="78" cy="48" r="1.5"/>
+              <circle cx="112" cy="52" r="1.6"/>
+              <circle cx="92" cy="68" r="1.4"/>
+              <circle cx="70" cy="62" r="1.8"/>
+              <circle cx="118" cy="44" r="1.3"/>
+              <circle cx="100" cy="40" r="1.2"/>
             </g>
-            <path d="M58 86 C70 70 84 68 104 52" fill="none" stroke="#8a7a5c" stroke-width="1.4"/>
           </svg>
           <p class="pano-empty" id="pano-empty">Sağdan bir not veya fotoğraf iğnele.</p>
           <div id="pano-notes"></div>
