@@ -56,9 +56,33 @@ function formatDate(iso) {
   return new Intl.DateTimeFormat("tr-TR", { day: "numeric", month: "long", year: "numeric" }).format(new Date(y, m - 1, d));
 }
 
-function formatHours(hours) {
-  const text = new Intl.NumberFormat("tr-TR", { maximumFractionDigits: 2 }).format(hours);
-  return `${text} sa`;
+function parseTime(value) {
+  const match = /^([01]\d|2[0-3]):([0-5]\d)(?::[0-5]\d)?$/.exec(String(value || "").trim());
+  if (!match) return null;
+  return Number(match[1]) * 60 + Number(match[2]);
+}
+
+function minutesBetween(start, end) {
+  const from = parseTime(start);
+  const to = parseTime(end);
+  if (from == null || to == null) return null;
+  let minutes = to - from;
+  if (minutes === 0) return null;
+  if (minutes < 0) minutes += 24 * 60;
+  return minutes > 0 && minutes <= 24 * 60 ? minutes : null;
+}
+
+function formatDuration(minutes) {
+  if (!Number.isFinite(minutes) || minutes <= 0) return "";
+  const hours = Math.floor(minutes / 60);
+  const mins = minutes % 60;
+  if (hours && mins) return `${hours} sa ${mins} dk`;
+  if (hours) return `${hours} sa`;
+  return `${mins} dk`;
+}
+
+function hoursFromMinutes(minutes) {
+  return Math.round((minutes / 60) * 100) / 100;
 }
 
 function readPlan() {
@@ -96,34 +120,23 @@ function loadRows() {
 }
 
 function isTime(value) {
-  return /^([01]\d|2[0-3]):[0-5]\d$/.test(value || "");
-}
-
-function hoursBetween(start, end) {
-  if (!isTime(start) || !isTime(end)) return null;
-  const [sh, sm] = start.split(":").map(Number);
-  const [eh, em] = end.split(":").map(Number);
-  let minutes = (eh * 60 + em) - (sh * 60 + sm);
-  if (minutes === 0) return null;
-  if (minutes < 0) minutes += 24 * 60;
-  const hours = Math.round((minutes / 60) * 100) / 100;
-  return hours > 0 && hours <= 24 ? hours : null;
+  return parseTime(value) != null;
 }
 
 function hydrate(item) {
   const name = String(item?.name || "").trim().slice(0, 80);
-  const start = isTime(item?.start) ? item.start : null;
-  const end = isTime(item?.end) ? item.end : null;
-  let hours = Number(item?.hours);
-  if (start && end) hours = hoursBetween(start, end);
-  if (!name || !isISO(item?.date) || !Number.isFinite(hours) || hours <= 0 || hours > 24) return null;
+  const start = isTime(item?.start) ? String(item.start).slice(0, 5) : null;
+  const end = isTime(item?.end) ? String(item.end).slice(0, 5) : null;
+  const minutes = start && end ? minutesBetween(start, end) : null;
+  if (!name || !isISO(item?.date) || minutes == null) return null;
   return {
     id: String(item.id || uid()),
     name,
     date: item.date,
     start,
     end,
-    hours: Math.round(hours * 100) / 100,
+    minutes,
+    hours: hoursFromMinutes(minutes),
     note: String(item.note || "").trim().slice(0, 800),
     createdAt: Number(item.createdAt) || Date.now(),
   };
@@ -146,9 +159,9 @@ function resetForm() {
 
 function paint() {
   const items = sortedRows();
-  const total = items.reduce((sum, item) => sum + item.hours, 0);
+  const total = items.reduce((sum, item) => sum + item.minutes, 0);
   sumNode.textContent = items.length
-    ? `${items.length} kayıt · toplam ${formatHours(total)}`
+    ? `${items.length} kayıt · toplam ${formatDuration(total)}`
     : "Başlangıç ve bitiş yazılınca süre kendisi dolar. Gece yarısını geçen mesai de sayılır.";
   document.getElementById("export-xlsx").disabled = items.length === 0;
   if (!items.length) {
@@ -162,7 +175,7 @@ function paint() {
       <td>${esc(formatDate(item.date))}</td>
       <td class="mesai-hours">${esc(item.start || "—")}</td>
       <td class="mesai-hours">${esc(item.end || "—")}</td>
-      <td class="mesai-hours">${esc(formatHours(item.hours))}</td>
+      <td class="mesai-hours">${esc(formatDuration(item.minutes))}</td>
       <td class="mesai-note">${esc(item.note) || "—"}</td>
       <td class="mesai-actions">
         <button type="button" class="text-btn" data-edit="${esc(item.id)}">Düzenle</button>
@@ -178,7 +191,7 @@ function onSubmit(event) {
   const start = String(data.get("start") || "");
   const end = String(data.get("end") || "");
   form.end.setCustomValidity("");
-  if (isTime(start) && isTime(end) && !hoursBetween(start, end)) {
+  if (isTime(start) && isTime(end) && !minutesBetween(start, end)) {
     form.end.setCustomValidity("Bitiş, başlangıçla aynı olamaz.");
     form.end.reportValidity();
     return;
@@ -189,7 +202,6 @@ function onSubmit(event) {
     date: data.get("date"),
     start,
     end,
-    hours: data.get("hours"),
     note: data.get("note"),
     createdAt: rows.find((item) => item.id === editingId)?.createdAt || Date.now(),
   });
@@ -212,7 +224,7 @@ function startEdit(id) {
   form.date.value = item.date;
   form.start.value = item.start || "";
   form.end.value = item.end || "";
-  form.hours.value = String(item.hours);
+  form.hours.value = formatDuration(item.minutes);
   form.note.value = item.note;
   saveBtn.textContent = "Güncelle";
   form.name.focus();
@@ -391,8 +403,8 @@ function boot() {
   loadRows();
   form.date.value = todayISO();
   const fillHours = () => {
-    const hours = hoursBetween(form.start.value, form.end.value);
-    if (hours) form.hours.value = String(hours);
+    const minutes = minutesBetween(form.start.value, form.end.value);
+    form.hours.value = minutes ? formatDuration(minutes) : "";
     form.end.setCustomValidity("");
   };
   form.start.addEventListener("input", fillHours);
